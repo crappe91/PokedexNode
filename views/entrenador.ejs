@@ -1,0 +1,49 @@
+<%- include("template/cabecera.ejs", {tituloWeb:'Entrenador'}) %>
+<%- include("template/nav.ejs") %>
+  <div class="container-fluid">
+   
+    <div class="row align-content-center ">
+        <div class="col-12 text-center mt-5 mb-5 bg-dark">
+            <h2 class="text-light display-4">ENTRENADOR</h2>
+        </div>
+    </div>
+
+ 
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Biografía</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">Lista Pokemon</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (arrayEntrenador.length> 0) { %>
+                    <!--Haremos el foreach para recorrer el array-->
+                    <% arrayEntrenador.forEach(entrenador => { %>
+                        <tr>
+                            <th scope="row"><%= entrenador.id %></th>
+                            <td><%= entrenador.nombre %></td>
+                            <td><%= entrenador.biografia %></td>
+                            <td><%= entrenador.ciudad %></td>
+                            <td><%= entrenador.lista %></td>
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="entrenador/<%= entrenador.id %>">Editar/Eliminar</a>
+                                </td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+          </tbody>
+
+
+        </table>
+        <a class="btn btn-success btn-block my-4" href="/entrenador/crearEntrenador">Crear un nuevo entrenador</a>
+        <a class="btn btn-primary btn-block my-4" href="/">Inicio</a>
+
+    </div>
+
+
+<%- include("template/footer.ejs") %>

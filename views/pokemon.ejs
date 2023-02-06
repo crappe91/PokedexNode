@@ -1,0 +1,48 @@
+<%- include("template/cabecera.ejs", {tituloWeb:'Pokemon'}) %>
+<%- include("template/nav.ejs") %>
+  <div class="container-fluid">
+
+    <div class="row align-content-center">
+        <div class="col-12 text-center mt-5 mb-5 bg-dark">
+            <h2 class="text-light display-4">POKEMON</h2>
+        </div>
+    </div>
+
+   
+ 
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (arrayPokemon.length> 0) { %>
+                    <!--Haremos el foreach para recorrer el array-->
+                    <% arrayPokemon.forEach(pokemon => { %>
+                        <tr>
+                            <th scope="row"><%= pokemon.id %></th>
+                            <td><%= pokemon.nombre %></td>
+                            <td><%= pokemon.tipo %></td>
+                            <td><%= pokemon.descripcion %></td>
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="pokemon/<%= pokemon.id %>">Editar/Eliminar</a>
+                                </td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+          </tbody>
+
+
+        </table>
+        <a class="btn btn-success btn-block my-4" href="/pokemon/crear">Crear un nuevo pokemon</a>
+        <a class="btn btn-primary btn-block my-4" href="/">Inicio</a>
+
+    </div>
+
+
+<%- include("template/footer.ejs") %>

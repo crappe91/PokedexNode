@@ -1,0 +1,111 @@
+<%- include("template/cabecera.ejs", {tituloWeb:'Panel de Administración'}) %>
+<%- include("template/nav.ejs") %>
+
+
+<div class="container-fluid">
+    <div class="row align-content-center ">
+        <div class="col-12 text-center mt-5 mb-3 bg-dark">
+            <h2 class="text-light display-4">DETALLES DEL POKEMON</h2>
+        </div>
+    </div>
+
+        <% if (error) { %>
+            <%= mensaje %> 
+            <a 
+                href="/pokemon"
+                class="btn btn-dark btn-block my-2"
+            >
+                Volver
+            </a>
+<% } %>
+<% if (!error) { %>
+    <form id="editar" data-id="<%= pokemon.id %>">
+        <label for="nombre">
+            <h4>Nombre</h4>
+        </label>
+        <input type="text" value="<%= pokemon.nombre %>" class="form-control my-2 mb-3" name="nombre"
+            id="nombreInput">
+
+            <label for="tipo">
+                <h4>Tipo</h4>
+            </label>
+        <input type="text" value="<%= pokemon.tipo %>" class="form-control my-2 mb-3" name="tipo"
+            id="tipoInput">
+
+            <label for="descripcion">
+                <h4>Descripción</h4>
+            </label>
+        <input type="text" value="<%= pokemon.descripcion %>" class="form-control my-2 mb-3"
+            name="descripcion" id="descripcionInput">
+        <!-- <button class="btn btn-warning mb-3" type="submit">
+            Editar
+        </button> -->
+        <button class="btn btn-primary btn-block mb-3"  type="submit"">
+            Editar Pokemon
+        </button>
+
+        <button class="btn btn-danger btn-block mb-3"  data-id="<%= pokemon.id %>">
+            Eliminar Pokemon
+        </button>
+        
+    
+        <button src="/pokemon" type="submit" class="btn btn-warning btn-block mb-3">
+            Volver a Pokemon
+        </button>
+
+    </form>
+    
+
+   
+
+  
+
+<% } %>
+
+    
+</div>
+<%- include("template/footer") %>
+<script>
+    const btnEliminar = document.querySelector('.btn-danger')
+    btnEliminar.addEventListener('click', async () => {
+        console.log(btnEliminar.dataset.id)
+        try {
+            // https://developer.mozilla.org/es/docs/Web/API/HTMLElement/dataset
+            const data = await fetch(`/pokemon/${btnEliminar.dataset.id}`, {
+                method: 'delete'
+            })
+            const res = await data.json()
+            console.log(res)
+            if (res.estado) {
+                window.location.href = '/pokemon'
+            } else {
+                console.log(res)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
+    const formEditar = document.querySelector('#editar');
+            formEditar.addEventListener('submit', async (e) => {
+                e.preventDefault()
+                const nombre = formEditar.elements['nombre'].value
+                const tipo = formEditar.elements['tipo'].value
+                const descripcion = formEditar.elements['descripcion'].value
+                const id = formEditar.dataset.id
+                const data = await fetch(`/pokemon/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombre, tipo, descripcion })
+                })
+                const res = await data.json()
+                if (res.estado) {
+                    window.location.href = '/pokemon'
+                } else {
+                    console.log(res)
+                }
+            })
+
+</script>

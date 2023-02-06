@@ -1,0 +1,36 @@
+<%- include("template/cabecera.ejs", {tituloWeb:'Panel de Administración'}) %>
+<%- include("template/nav.ejs") %>
+    <div class="container-fluid">
+        
+        
+    <div class="row align-content-center ">
+        <div class="col-12 text-center mb-3 mb-5 bg-dark">
+            <h2 class="text-light display-4">CREAR UN NUEVO POKEMON</h2>
+        </div>
+    </div>
+
+        <form action="/pokemon" class="my-2" method="POST">
+
+            <label for="nombre">
+                <h4>Nombre</h4>
+            </label>
+            <input type="text" placeholder="Nombre Pokemon" class="form-control my-2 mb-3" name="nombre">
+
+            <label for="tipo">
+                <h4>Tipo</h4>
+            </label>
+            <input type="text" placeholder="Tipo Pokemon" class="form-control my-2 mb-3" name="tipo">
+
+            <label for="descripcion">
+                <h4>Descripción</h4>
+            </label>
+            <input type="text" placeholder="Descripción Pokemon" class="form-control my-2 mb-3" name="descripcion">
+            <button type="submit" class="btn btn-success btn-block mb-3">
+                Agregar
+            </button>
+            <button src="/pokemon" type="submit" class="btn btn-warning btn-block mb-3">
+                Volver a Pokemon
+            </button>
+        </form>
+    </div>
+<%- include("template/footer") %>

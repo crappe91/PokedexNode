@@ -1,0 +1,45 @@
+<%- include("template/cabecera.ejs" , {tituloWeb:'Inicio'}) %>
+<%- include("template/nav.ejs") %>
+
+
+<div class="container-fluid">
+    <div class="row align-content-center ">
+        <div class="col-12 text-center mt-5 mb-5 bg-dark">
+            <h2 class="text-light display-4"><%= titulo %></h2>
+        </div>
+    </div>
+    
+    <div class="row align-content-center ">
+
+    <div class="col-6 d-flex justify-content-center ">
+
+    <div class="card" style="width: 18rem;"">
+        <img src="images/pokemon.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">POKEMON</h5>
+          <p class="card-text">Accede al listado de Pokemon, crea, edita y elimina tus Pokemons.</p>
+          <a href="/pokemon" class="btn btn-success">Ir a Pokemon</a>
+        </div>
+      </div>
+
+    </div>
+
+      <div class="col-6 d-flex justify-content-center">
+        <div class="card" style="width: 18rem;">
+            <img src="images/entrenador.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">ENTRENADOR</h5>
+              <p class="card-text">Accede al listado de Entrenadores, crea, edita y elimina tus Entrenadores.</p>
+              <a href="/entrenador" class="btn btn-danger text-light">Ir a Entrenadores</a>
+            </div>
+          </div>
+    
+    </div>
+
+   
+</div>
+       
+</div>
+
+    
+<%- include("template/footer.ejs") %>

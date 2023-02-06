@@ -1,0 +1,120 @@
+<%- include("template/cabecera.ejs", {tituloWeb:'Panel de Administración'}) %>
+
+<%- include("template/nav.ejs") %>
+
+
+<div class="container-fluid">
+    <div class="row align-content-center ">
+        <div class="col-12 text-center mt-5 mb-3 bg-dark">
+            <h2 class="text-light display-4">DETALLES DEL ENTRENADOR</h2>
+        </div>
+    </div>
+
+
+        <% if (error) { %>
+            <%= mensaje %> 
+            <a 
+                href="/entrenador"
+                class="btn btn-dark btn-block my-2"
+            >
+                Volver
+            </a>
+<% } %>
+<% if (!error) { %>
+    <form id="editar" data-id="<%= entrenador.id %>">
+
+        <label for="nombre">
+            <h4>Nombre</h4>
+        </label>
+
+        <input type="text" value="<%= entrenador.nombre %>" class="form-control my-2 mb-3" name="nombre"
+            id="nombreInput">
+
+            <label for="biografia">
+                <h4>Biografía</h4>
+            </label>
+        <input type="text" value="<%= entrenador.biografia %>" class="form-control my-2 mb-3" name="biografia"
+            id="tipoInput">
+
+            <label for="ciudad">
+                <h4>Ciudad</h4>
+            </label>
+        <input type="text" value="<%= entrenador.ciudad %>" class="form-control my-2 mb-3"
+            name="ciudad" id="descripcionInput">
+        
+            <label for="lista">
+                <h4>Lista Pokemon</h4>
+            </label>
+            <input type="text" value="<%= entrenador.lista %>" class="form-control my-2 mb-3"
+            name="lista" id="descripcionInput">
+        <!-- <button class="btn btn-warning  mb-3" type="submit">
+            Editar
+        </button> -->
+        <button class="btn btn-primary btn-block mb-3"  type="submit"">
+            Editar Entrenador
+        </button>
+
+        <button class="btn btn-danger btn-block mb-3"  type="submit" data-id="<%= entrenador.id %>">
+            Eliminar Entrenador
+        </button>
+        
+        <button src="/entrenador" type="submit" class="btn btn-warning btn-block mb-3">
+            Volver a Entrenador
+        </button>
+
+
+
+    </form>
+    
+ 
+<% } %>
+
+    
+</div>
+
+<%- include("template/footer") %>
+<script>
+    const btnEliminar = document.querySelector('.btn-danger')
+    btnEliminar.addEventListener('click', async () => {
+        console.log(btnEliminar.dataset.id)
+        try {
+            // https://developer.mozilla.org/es/docs/Web/API/HTMLElement/dataset
+            const data = await fetch(`/entrenador/${btnEliminar.dataset.id}`, {
+                method: 'delete'
+            })
+            const res = await data.json()
+            console.log(res)
+            if (res.estado) {
+                window.location.href = '/entrenador'
+            } else {
+                console.log(res)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
+    const formEditar = document.querySelector('#editar');
+            formEditar.addEventListener('submit', async (e) => {
+                e.preventDefault()
+                const nombre = formEditar.elements['nombre'].value
+                const biografia = formEditar.elements['biografia'].value
+                const ciudad = formEditar.elements['ciudad'].value
+                const lista = formEditar.elements['lista'].value
+                const id = formEditar.dataset.id
+                const data = await fetch(`/entrenador/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombre, biografia, ciudad, lista })
+                })
+                const res = await data.json()
+                if (res.estado) {
+                    window.location.href = '/entrenador'
+                } else {
+                    console.log(res)
+                }
+            })
+
+</script>

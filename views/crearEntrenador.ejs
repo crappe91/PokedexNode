@@ -1,0 +1,40 @@
+<%- include("template/cabecera.ejs", {tituloWeb:'Panel de Administración'}) %>
+<%- include("template/nav.ejs") %>
+    <div class="container-fluid">
+        
+        <div class="row align-content-center ">
+            <div class="col-12 text-center mb-3 mb-5 bg-dark">
+                <h2 class="text-light display-4">CREAR UN NUEVO ENTRENADOR</h2>
+            </div>
+        </div>
+
+        <form action="/entrenador" class="my-2" method="POST">
+
+            <label for="nombre">
+                <h4>Nombre</h4>
+            </label>
+            <input type="text" placeholder="Nombre del Entrenador" class="form-control my-2 mb-3" name="nombre">
+
+            <label for="biografia">
+                <h4>Biografía</h4>
+            </label>
+            <input type="text" placeholder="Biografía del Entrenador" class="form-control my-2 mb-3" name="biografia">
+
+            <label for="ciudad">
+                <h4>Ciudad</h4>
+            </label>
+            <input type="text" placeholder="Ciudad del Entrenador" class="form-control my-2 mb-3" name="ciudad">
+
+            <label for="lista">
+                <h4>Lista Pokemon</h4>
+            </label>
+            <input type="text" placeholder="Lista de Pokemons del Entrenador" class="form-control my-2 mb-3" name="lista">
+            <button type="submit" class="btn btn-success btn-block mb-3">
+                Agregar
+            </button>
+            <button src="/entrenador" type="submit" class="btn btn-warning btn-block mb-3">
+                Volver a Entrenador
+            </button>
+        </form>
+    </div>
+<%- include("template/footer") %>
